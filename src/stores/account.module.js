@@ -1,5 +1,4 @@
 import AuthenService from '@/services/AuthenService'
-import router from '@/router'
 
 const user = JSON.parse(localStorage.getItem('user'))
 const state = user
@@ -12,10 +11,9 @@ const mutations = {
     state.user = user
     state.profile = null
   },
-  loginSuccess(state, {user, profile}) {
+  loginSuccess(state, user) {
     state.status = { loggedIn: true }
     state.user = user
-    state.profile = profile
   },
   loginFailure(state) {
     state.status = {}
@@ -26,45 +24,40 @@ const mutations = {
     state.status = {}
     state.user = null
     state.profile = null
+  },
+  changeProfile(state, profile) {
+    state.profile = profile
   }
 }
 
 const actions = {
 
-  loginWithCode({ dispatch, commit }, code) {
+  async loginWithCode({ commit }, code) {
     commit('loginRequest')
+    var user = await AuthenService.validate_authorize(code)
+    commit('loginSuccess', user)
+  },
 
-    AuthenService.validate_authorize(code)
-        .then(user => {
-            
-            commit('loginSuccess', {user, profile: 'a'})
-            router.push({ name: 'posts' })
-        })
-        .catch(error => {
-            commit('loginFailure')
-            dispatch('alert/error', error.message, { root: true })
-        })
+  async setProfile({ commit }, profile) {
+    commit('changeProfile', profile)
   },
 
   logout({ commit }) {
     AuthenService.logout()
-        .then( () => {
-            commit('logout')
-            router.push({name: 'posts'})
-        })
-    
+    commit('logout')
+    return true
   }
 }
 
 const getters = {
     access_token: state => {
-        return state.access_token
+      return state.access_token
     },
     token_type : state => {
-        return state.token_type
+      return state.token_type
     },
     refresh_token : state => {
-        return state.refresh_token
+      return state.refresh_token
     }
 }
 

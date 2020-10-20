@@ -21,8 +21,9 @@ class AuthenService {
         return response.data
     }
 
-    async logout() {
+    logout() {
         localStorage.removeItem('user')
+        console.log('remove')
     }
 }
 

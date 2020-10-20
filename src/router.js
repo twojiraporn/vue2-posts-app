@@ -8,7 +8,11 @@ export default new Router({
   routes: [
     {
       path: "/",
-      alias: "/posts",
+      name: "home",
+      component: () => import("./pages/Home")
+    },
+    {
+      path: "/posts",
       name: "posts",
       component: () => import("./pages/Posts/List")
     },
@@ -26,6 +30,21 @@ export default new Router({
       path: "/callback",
       name: "callback",
       component: () => import("./pages/Auth/Callback")
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("./pages/Auth/Login")
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: () => import("./pages/Auth/Logout")
+    },
+    {
+      path: "/set-profile",
+      name: "profile",
+      component: () => import("./pages/Auth/SetProfile")
     }
   ]
 });
