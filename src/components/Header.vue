@@ -12,37 +12,28 @@
             </div>
             <div class="navbar-nav">
                 <li class="nav-item" v-if="!user">
-                    <a href="#" class="nav-link" @click="login">Login</a>
+                    <router-link to="/login" class="nav-link">Login</router-link>
+                </li>
+                <li class="nav-item" v-if="profile">
+                    <span href="#" class="nav-link">
+                        <img class="rounded-circle" width="30" :src="profile.profile_photo_url" alt="">
+                        {{ profile.name }}
+                    </span>
                 </li>
                 <li class="nav-item" v-if="user">
-                    <span href="#" class="nav-link">{{ profile }}</span>
-                </li>
-                <li class="nav-item" v-if="user">
-                    <a href="#" class="nav-link" @click="handleLogout">Logout</a>
+                    <router-link to="/logout" class="nav-link">Logout</router-link>
                 </li>
             </div>
         </nav>
     </header>
 </template>
 <script>
-import AuthenService from '@/services/AuthenService'
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     name: "app-header",
     computed: {
         ...mapState('account', ['user', 'profile'])
-    },
-    methods: {
-        ...mapActions('account', ['logout']),
-        login(e) {
-            e.preventDefault();
-            AuthenService.login()
-        },
-        handleLogout(e) {
-            e.preventDefault();
-            this.logout()
-        }
     }
 }
 </script>

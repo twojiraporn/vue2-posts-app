@@ -6,7 +6,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-// import router from '@/router'
+import router from '@/router'
 
 export default {
     
@@ -14,7 +14,7 @@ export default {
         ...mapActions('account', ['loginWithCode']),
         async init() {
             await this.loginWithCode(this.$route.query.code)
-            // router.push({name: 'posts'})
+            router.push({name: 'profile'})
         }
     },
     mounted() {
