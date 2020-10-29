@@ -9,42 +9,42 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: () => import("./pages/Home")
+      component: () => import("./pages/Home"),
     },
     {
       path: "/posts",
       name: "posts",
-      component: () => import("./pages/Posts/List")
+      component: () => import("./pages/Posts/List"),
     },
     {
       path: "/posts/:id",
       name: "post-show",
-      component: () => import("./pages/Posts/Detail")
+      component: () => import("./pages/Posts/Detail"),
     },
     {
       path: "/add",
       name: "add",
-      component: () => import("./pages/Posts/Add")
+      component: () => import("./pages/Posts/Add"),
     },
     {
       path: "/callback",
       name: "callback",
-      component: () => import("./pages/Auth/Callback")
+      component: () => import("./pages/Auth/Callback"),
     },
     {
       path: "/login",
       name: "login",
-      component: () => import("./pages/Auth/Login")
+      component: () => import("./pages/Auth/Login"),
     },
     {
       path: "/logout",
       name: "logout",
-      component: () => import("./pages/Auth/Logout")
+      component: () => import("./pages/Auth/Logout"),
     },
     {
       path: "/set-profile",
       name: "profile",
-      component: () => import("./pages/Auth/SetProfile")
-    }
-  ]
+      component: () => import("./pages/Auth/SetProfile"),
+    },
+  ],
 });

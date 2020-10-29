@@ -1,29 +1,28 @@
 <template>
-  <div>
-
-  </div>
+  <div></div>
 </template>
 
 <script>
-import UserService from '@/services/UserService'
-import { mapActions } from 'vuex'
-import router from '@/router'
+import UserService from "@/services/UserService";
+import { mapActions } from "vuex";
+import router from "@/router";
 
 export default {
   methods: {
-    ...mapActions('account', ['setProfile']),
+    ...mapActions("account", ["setProfile"]),
     async set() {
-      var profile = await UserService.profile()
-      this.setProfile(profile.data)
-      router.push({name: 'posts'})
+      var profile = await UserService.profile();
+      localStorage.setItem("profile", JSON.stringify(profile.data));
+      this.setProfile(profile.data);
+      console.log(profile);
+      router.push({ name: "posts" });
     }
   },
   mounted() {
-    this.set()
+    this.set();
   }
-}
+};
 </script>
 
 <style>
-
 </style>
